@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using suncoast_overflow.Models;
 
 namespace suncoast_overflow
 {
@@ -44,5 +45,7 @@ namespace suncoast_overflow
     {
       modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
     }
+
+    public DbSet<Questions> Question { get; set; }
   }
 }
