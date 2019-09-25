@@ -49,5 +49,13 @@ namespace suncoast_overflow.Controllers
       return questions.ToList();
     }
     // Delete A Question
+    [HttpDelete("{id}")]
+    public ActionResult<Questions> DeleteEntry([FromBody]Questions entry, int id)
+    {
+      var questionToDelete = context.Question.FirstOrDefault(question => question.Id == id);
+      context.Question.Remove(questionToDelete);
+      context.SaveChanges();
+      return questionToDelete;
+    }
   }
 }
