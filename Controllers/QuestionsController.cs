@@ -27,19 +27,19 @@ namespace suncoast_overflow.Controllers
     }
 
     // Get A Question
-    // [HttpGet("{id}")]
-    // public ActionResult GetOneItem(int id)
-    // {
-    //   var question = context.Question.FirstOrDefault(q => q.Id == id);
-    //   if (question == null)
-    //   {
-    //     return NotFound();
-    //   }
-    //   else
-    //   {
-    //     return Ok(question);
-    //   }
-    // }
+    [HttpGet("{id}")]
+    public ActionResult GetOneItem(int id)
+    {
+      var question = context.Question.FirstOrDefault(q => q.Id == id);
+      if (question == null)
+      {
+        return NotFound();
+      }
+      else
+      {
+        return Ok(question);
+      }
+    }
 
     // Get All Questions
     // [HttpGet]
