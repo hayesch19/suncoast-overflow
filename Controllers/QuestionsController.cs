@@ -42,12 +42,12 @@ namespace suncoast_overflow.Controllers
     }
 
     // Get All Questions
-    // [HttpGet]
-    // public ActionResult<IEnumerable<Questions>> GetAllItems()
-    // {
-    //   var question = context.Question.OrderByDescending(question => question.DateAsked);
-    //   return question.ToList();
-    // }
+    [HttpGet]
+    public ActionResult<IEnumerable<Questions>> GetAllItems()
+    {
+      var questions = context.Question.OrderByDescending(question => question.DateAsked);
+      return questions.ToList();
+    }
     // Delete A Question
   }
 }
