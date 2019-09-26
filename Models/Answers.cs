@@ -10,5 +10,8 @@ namespace suncoast_overflow.Models
     public int UpVotes { get; set; }
     public int DownVotes { get; set; }
 
+
+    public int? QuestionsId { get; set; }
+    public Questions Questions { get; set; }
   }
 }

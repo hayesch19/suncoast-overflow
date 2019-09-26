@@ -71,5 +71,24 @@ namespace suncoast_overflow.Controllers
       context.SaveChanges();
       return questionToDelete;
     }
+
+    // Adding Answers To Questions
+    [HttpPost("{QuestionsId}/Answer")]
+    public ActionResult<Answers> CreateAnswer(int QuestionsId, [FromBody]Answers answers)
+    {
+      var questions = context.Question.FirstOrDefault(q => q.Id == QuestionsId);
+      if (questions == null)
+      {
+        return NotFound();
+      }
+      else
+      {
+        answers.QuestionsId = QuestionsId;
+        context.Answer.Add(answers);
+        context.SaveChanges();
+        return Ok();
+
+      }
+    }
   }
 }
