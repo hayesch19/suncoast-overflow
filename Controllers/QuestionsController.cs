@@ -48,6 +48,20 @@ namespace suncoast_overflow.Controllers
       var questions = context.Question.OrderByDescending(question => question.DateAsked);
       return questions.ToList();
     }
+
+    // Update Question
+    [HttpPut("{id}")]
+    public ActionResult<Questions> UpdateQuestion(int id, [FromBody]Questions newDetails)
+    {
+      if (id != newDetails.Id)
+      {
+        return BadRequest();
+      }
+      context.Entry(newDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+      context.SaveChanges();
+      return newDetails;
+    }
+
     // Delete A Question
     [HttpDelete("{id}")]
     public ActionResult<Questions> DeleteEntry([FromBody]Questions entry, int id)
