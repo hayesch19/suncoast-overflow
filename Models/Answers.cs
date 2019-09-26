@@ -7,7 +7,8 @@ namespace suncoast_overflow.Models
     public int Id { get; set; }
     public string Answer { get; set; }
     public DateTime DateAsked { get; set; }
-    public int UpVote { get; set; }
-  
+    public int UpVotes { get; set; }
+    public int DownVotes { get; set; }
+
   }
 }
