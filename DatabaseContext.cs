@@ -10,6 +10,7 @@ namespace suncoast_overflow
   {
     public DatabaseContext()
     {
+
     }
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options)
@@ -45,7 +46,7 @@ namespace suncoast_overflow
     {
       modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
     }
-
+    public DbSet<Answers> Answer { get; set; }
     public DbSet<Questions> Question { get; set; }
   }
 }
