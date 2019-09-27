@@ -1,24 +1,39 @@
 using System.Collections.Generic;
 using System.Linq;
-using blogapi;
-using BlogApi.Models;
-using BlogApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-namespace BlogApi.Controllers
+using suncoast_overflow.Models;
+
+
+namespace suncoast_overflow.Controllers
 {
+
+
   [Route("api/[controller]")]
   [ApiController]
-  public class AnswerController : ControllerBase
+  public class AnswersController : ControllerBase
   {
+    private DatabaseContext context;
+
+    public AnswersController(DatabaseContext _context)
+    {
+      this.context = _context;
+    }
+
+    [HttpPost]
+    public ActionResult<Answers> CreateEntry([FromBody] Answers entry)
+    {
+      context.Answer.Add(entry);
+      context.SaveChanges();
+      return entry;
+    }
 
     [HttpGet]
     public ActionResult<IEnumerable<Answers>> GetAllAnswers()
     {
-
-      var context = DatabaseContext();
-      // 2. do the thing
-      var answers = context.Answers.OrderByDescending(answers => answers.DateCreated);
-      // 3. return the thing
-      return answers.ToList();
+      var a = context.Answer.OrderByDescending(l => l.DateAsked);
+      return a.ToList();
     }
+
+  }
+
+}
