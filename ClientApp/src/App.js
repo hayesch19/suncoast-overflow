@@ -1,22 +1,37 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router'
-import { Layout } from './components/Layout'
-import { Home } from './components/Home'
-import { FetchData } from './components/FetchData'
-import { Counter } from './components/Counter'
-import Testing from './Testing'
+import Homepage from './components/Homepage'
+import Questions from './components/AllQuestions'
+import AllQuestions from './components/Questions'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
-export default class App extends Component {
-  static displayName = App.name
-
+class App extends Component {
   render() {
     return (
-      <Layout>
-        <Route exact path="/" component={Home} />
-        <Route path="/counter" component={Counter} />
-        <Route path="/fetch-data" component={FetchData} />
-        <Route path="/hello" component={Testing} />
-      </Layout>
+      <Router>
+        <h1 className="header"> Suncoast Overflow </h1>
+        <div className="topnav">
+          <nav className="nav-bar">
+            <Link className="Link-Home" to="/HomePage">
+              HomePage
+            </Link>
+            <Link className="Link-Questions" to="/Questions">
+              Questions
+            </Link>
+            <input type="text" placeholder="Search.." />
+            <Link className="Link-All-Questions" to="/AllQuestions">
+              All Questions
+            </Link>
+          </nav>
+        </div>
+
+        <Switch>
+          <Route exact path="/HomePage" component={Homepage} />
+          <Route exact path="/Add" component={Questions} />
+          <Route exact path="/:id" component={AllQuestions} />
+        </Switch>
+      </Router>
     )
   }
 }
+
+export default App
