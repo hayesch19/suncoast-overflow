@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using suncoast_overflow;
@@ -9,9 +10,10 @@ using suncoast_overflow;
 namespace sdgreacttemplate.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190926184413_UpdatedAnswersModel")]
+    partial class UpdatedAnswersModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,13 +32,9 @@ namespace sdgreacttemplate.Migrations
 
                     b.Property<int>("DownVotes");
 
-                    b.Property<int?>("QuestionsId");
-
                     b.Property<int>("UpVotes");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("QuestionsId");
 
                     b.ToTable("Answer");
                 });
@@ -57,13 +55,6 @@ namespace sdgreacttemplate.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Question");
-                });
-
-            modelBuilder.Entity("suncoast_overflow.Models.Answers", b =>
-                {
-                    b.HasOne("suncoast_overflow.Models.Questions", "Questions")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionsId");
                 });
 #pragma warning restore 612, 618
         }

@@ -48,6 +48,20 @@ namespace suncoast_overflow.Controllers
       var questions = context.Question.OrderByDescending(question => question.DateAsked);
       return questions.ToList();
     }
+
+    // Update Question
+    [HttpPut("{id}")]
+    public ActionResult<Questions> UpdateQuestion(int id, [FromBody]Questions newDetails)
+    {
+      if (id != newDetails.Id)
+      {
+        return BadRequest();
+      }
+      context.Entry(newDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+      context.SaveChanges();
+      return newDetails;
+    }
+
     // Delete A Question
     [HttpDelete("{id}")]
     public ActionResult<Questions> DeleteEntry([FromBody]Questions entry, int id)
@@ -56,6 +70,25 @@ namespace suncoast_overflow.Controllers
       context.Question.Remove(questionToDelete);
       context.SaveChanges();
       return questionToDelete;
+    }
+
+    // Adding Answers To Questions
+    [HttpPost("{QuestionsId}/Answer")]
+    public ActionResult<Answers> CreateAnswer(int QuestionsId, [FromBody]Answers answers)
+    {
+      var questions = context.Question.FirstOrDefault(q => q.Id == QuestionsId);
+      if (questions == null)
+      {
+        return NotFound();
+      }
+      else
+      {
+        answers.QuestionsId = QuestionsId;
+        context.Answer.Add(answers);
+        context.SaveChanges();
+        return Ok();
+
+      }
     }
   }
 }

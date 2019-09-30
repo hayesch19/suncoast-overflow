@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace suncoast_overflow.Models
 {
@@ -9,5 +10,8 @@ namespace suncoast_overflow.Models
     public DateTime DateAsked { get; set; }
     public int UpVotes { get; set; }
     public int DownVotes { get; set; }
+
+
+    public List<Answers> Answers { get; set; } = new List<Answers>();
   }
 }
